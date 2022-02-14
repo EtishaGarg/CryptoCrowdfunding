@@ -16,13 +16,11 @@ beforeEach(async () => {
     accounts = await web3.eth.getAccounts();
     factory = await new web3.eth.Contract(abiFactory,contract_address);
     await factory.methods.createCampaign('100').send({from : accounts[0]});
-    campaign = await factory.methods.getDeployedCampaigns(0).call();
-    //campaign = await new web3.eth.Contract(abiCampaign,contract.address);
+    //campaign = await factory.methods.getDeployedCampaigns().call();
 
-    //[campaignAddress]= factory.methods.getDeployedCampaigns().call();
+    [campaignAddress]= await factory.methods.getDeployedCampaigns().call();
     //campaign = factory.methods.deployedContracts(0).call();
-    //console.log(campaignAddress);
-    //campaign = await new web3.eth.Contract(abiCampaign,campaignAddress);
+    campaign = await new web3.eth.Contract(abiCampaign,campaignAddress);
     
 });
 
